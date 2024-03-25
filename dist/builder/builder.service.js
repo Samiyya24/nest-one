@@ -25,7 +25,7 @@ let BuilderService = class BuilderService {
         return builder;
     }
     async getAllBuilders() {
-        return this.builderRepo.findAll();
+        return this.builderRepo.findAll({ include: { all: true } });
     }
     async getBuilderById(id) {
         return this.builderRepo.findByPk(id);

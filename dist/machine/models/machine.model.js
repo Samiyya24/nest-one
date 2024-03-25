@@ -11,6 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Machine = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const company_model_1 = require("../../company/models/company.model");
+const driver_model_1 = require("../../driver/models/driver.model");
+const machine_driver_model_1 = require("../../machine_driver/models/machine_driver.model");
 let Machine = class Machine extends sequelize_typescript_1.Model {
 };
 exports.Machine = Machine;
@@ -36,11 +39,18 @@ __decorate([
     __metadata("design:type", String)
 ], Machine.prototype, "name", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
-    }),
+    (0, sequelize_typescript_1.ForeignKey)(() => company_model_1.Company),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
     __metadata("design:type", Number)
 ], Machine.prototype, "companyId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => company_model_1.Company),
+    __metadata("design:type", company_model_1.Company)
+], Machine.prototype, "company", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsToMany)(() => driver_model_1.Driver, () => machine_driver_model_1.MachineDriver),
+    __metadata("design:type", Array)
+], Machine.prototype, "driver", void 0);
 exports.Machine = Machine = __decorate([
     (0, sequelize_typescript_1.Table)({ tableName: "machine" })
 ], Machine);

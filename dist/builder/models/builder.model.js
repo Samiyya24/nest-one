@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Builder = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
+const company_model_1 = require("../../company/models/company.model");
 let Builder = class Builder extends sequelize_typescript_1.Model {
 };
 exports.Builder = Builder;
@@ -37,16 +38,21 @@ __decorate([
 ], Builder.prototype, "birth_day", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
+        type: sequelize_typescript_1.DataType.DECIMAL,
     }),
     __metadata("design:type", Number)
 ], Builder.prototype, "salary", void 0);
 __decorate([
+    (0, sequelize_typescript_1.ForeignKey)(() => company_model_1.Company),
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
+        type: sequelize_typescript_1.DataType.INTEGER
     }),
     __metadata("design:type", Number)
 ], Builder.prototype, "companyId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsTo)(() => company_model_1.Company),
+    __metadata("design:type", company_model_1.Company)
+], Builder.prototype, "company", void 0);
 exports.Builder = Builder = __decorate([
     (0, sequelize_typescript_1.Table)({ tableName: "builder" })
 ], Builder);

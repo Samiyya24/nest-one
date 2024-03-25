@@ -14,7 +14,7 @@ export class BuilderService {
   }
 
   async getAllBuilders(): Promise<Builder[]> {
-    return this.builderRepo.findAll();
+    return this.builderRepo.findAll({include:{all:true}});
   }
 
   async getBuilderById(id: number): Promise<Builder> {
@@ -24,6 +24,7 @@ export class BuilderService {
   async deleteBuilderById(id: number): Promise<number> {
     return this.builderRepo.destroy({ where: { id } });
   }
+  
   async updateBuilderById(
     id: number,
     updateBuilderDto: UpdateBuilderDto

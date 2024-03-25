@@ -1,4 +1,15 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import {
+  BelongsTo,
+  BelongsToMany,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Company } from "../../company/models/company.model";
+import { Driver } from "../../driver/models/driver.model";
+import { MachineDriver } from "../../machine_driver/models/machine_driver.model";
 
 interface MachineCreationAttr {
   model: string;
@@ -26,8 +37,13 @@ export class Machine extends Model<Machine, MachineCreationAttr> {
   })
   name: string;
 
-  @Column({
-    type: DataType.INTEGER,
-  })
+  @ForeignKey(() => Company)
+  @Column({ type: DataType.INTEGER })
   companyId: number;
+
+  @BelongsTo(() => Company)
+  company: Company;
+
+  @BelongsToMany(()=>Driver, ()=>MachineDriver)
+  driver:Driver[]
 }

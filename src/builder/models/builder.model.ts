@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Company } from "../../company/models/company.model";
 
 interface BuilderCreationAttr {
   full_name: string;
@@ -28,12 +29,16 @@ export class Builder extends Model<Builder, BuilderCreationAttr> {
   birth_day: Date;
 
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.DECIMAL,
   })
   salary: number;
 
+  @ForeignKey(()=>Company)
   @Column({
-    type: DataType.INTEGER,
+    type: DataType.INTEGER
   })
   companyId: number;
+
+  @BelongsTo(()=>Company)
+  company:Company
 }
