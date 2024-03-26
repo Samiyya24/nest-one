@@ -16,13 +16,14 @@ const user_role_model_1 = require("../roles/models/user-role.model");
 const role_model_1 = require("../roles/models/role.model");
 const roles_module_1 = require("../roles/roles.module");
 const auth_module_1 = require("../auth/auth.module");
+const post_model_1 = require("../posts/models/post.model");
 let UsersModule = class UsersModule {
 };
 exports.UsersModule = UsersModule;
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            sequelize_1.SequelizeModule.forFeature([user_model_1.User, user_role_model_1.UserRoles, role_model_1.Role]),
+            sequelize_1.SequelizeModule.forFeature([user_model_1.User, user_role_model_1.UserRoles, role_model_1.Role, post_model_1.Posts]),
             roles_module_1.RolesModule,
             (0, common_1.forwardRef)(() => auth_module_1.AuthModule),
         ],

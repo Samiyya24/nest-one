@@ -26,10 +26,18 @@ import { Builder } from './builder/models/builder.model';
 import { BuilderModule } from './builder/builder.module';
 import { MachineDriverModule } from './machine_driver/machine_driver.module';
 import { MachineDriver } from './machine_driver/models/machine_driver.model';
+import { FileModule } from './file/file.module';
+import { PostsModule } from './posts/posts.module';
+import { Posts } from './posts/models/post.model';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     ConfigModule.forRoot({envFilePath:".env", isGlobal:true}),
+    ServeStaticModule.forRoot({
+      rootPath:join(__dirname, 'static')
+    }),
     SequelizeModule.forRoot({
       dialect:"postgres",
       host:process.env.POSTGRES_HOST,
@@ -37,7 +45,7 @@ import { MachineDriver } from './machine_driver/models/machine_driver.model';
       username:process.env.POSTGRES_USER,
       password:process.env.POSTGRES_PASSWORD,
       database:process.env.POSTGRES_DB,
-      models:[Role, User, UserRoles, Company, Driver, Builder],
+      models:[Role, User, UserRoles, Company, Driver, Builder, Posts],
       autoLoadModels:true,
       sync:{alter:true},
       logging:true
@@ -50,7 +58,9 @@ import { MachineDriver } from './machine_driver/models/machine_driver.model';
     BuilderModule,
     RolesModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    FileModule,
+    PostsModule
   ],
   controllers: [],
   providers: [],

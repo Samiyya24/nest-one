@@ -14,6 +14,7 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const role_model_1 = require("../../roles/models/role.model");
 const user_role_model_1 = require("../../roles/models/user-role.model");
 const swagger_1 = require("@nestjs/swagger");
+const post_model_1 = require("../../posts/models/post.model");
 let User = class User extends sequelize_typescript_1.Model {
 };
 exports.User = User;
@@ -64,6 +65,10 @@ __decorate([
     (0, sequelize_typescript_1.BelongsToMany)(() => role_model_1.Role, () => user_role_model_1.UserRoles),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => post_model_1.Posts),
+    __metadata("design:type", Array)
+], User.prototype, "posts", void 0);
 exports.User = User = __decorate([
     (0, sequelize_typescript_1.Table)({ tableName: "users" })
 ], User);

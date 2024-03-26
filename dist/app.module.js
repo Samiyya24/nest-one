@@ -22,6 +22,11 @@ const driver_module_1 = require("./driver/driver.module");
 const driver_model_1 = require("./driver/models/driver.model");
 const builder_model_1 = require("./builder/models/builder.model");
 const builder_module_1 = require("./builder/builder.module");
+const file_module_1 = require("./file/file.module");
+const posts_module_1 = require("./posts/posts.module");
+const post_model_1 = require("./posts/models/post.model");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +34,9 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, 'static')
+            }),
             sequelize_1.SequelizeModule.forRoot({
                 dialect: "postgres",
                 host: process.env.POSTGRES_HOST,
@@ -36,7 +44,7 @@ exports.AppModule = AppModule = __decorate([
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB,
-                models: [role_model_1.Role, user_model_1.User, user_role_model_1.UserRoles, company_model_1.Company, driver_model_1.Driver, builder_model_1.Builder],
+                models: [role_model_1.Role, user_model_1.User, user_role_model_1.UserRoles, company_model_1.Company, driver_model_1.Driver, builder_model_1.Builder, post_model_1.Posts],
                 autoLoadModels: true,
                 sync: { alter: true },
                 logging: true
@@ -46,7 +54,9 @@ exports.AppModule = AppModule = __decorate([
             builder_module_1.BuilderModule,
             roles_module_1.RolesModule,
             users_module_1.UsersModule,
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule,
+            file_module_1.FileModule,
+            posts_module_1.PostsModule
         ],
         controllers: [],
         providers: [],

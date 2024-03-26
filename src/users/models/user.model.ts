@@ -1,7 +1,8 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
 import { Role } from "../../roles/models/role.model";
 import { UserRoles } from "../../roles/models/user-role.model";
 import { ApiProperty } from "@nestjs/swagger";
+import { Posts } from "../../posts/models/post.model";
 
 interface IUserCreationAttr {
   name: string;
@@ -46,4 +47,7 @@ export class User extends Model<User, IUserCreationAttr> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(()=>Posts)
+  posts: Posts[]
 }

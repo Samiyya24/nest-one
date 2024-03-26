@@ -1,5 +1,6 @@
 import { Model } from "sequelize-typescript";
 import { Role } from "../../roles/models/role.model";
+import { Posts } from "../../posts/models/post.model";
 interface IUserCreationAttr {
     name: string;
     email: string;
@@ -12,5 +13,6 @@ export declare class User extends Model<User, IUserCreationAttr> {
     password: string;
     is_active: boolean;
     roles: Role[];
+    posts: Posts[];
 }
 export {};
