@@ -41,13 +41,14 @@ let UsersService = class UsersService {
         return this.userRepo.findOne({ where: { email }, include: { all: true } });
     }
     findOne(id) {
-        return `This action returns a #${id} user`;
+        return this.userRepo.findByPk(id);
     }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;
     }
     remove(id) {
-        return `This action removes a #${id} user`;
+        this.userRepo.destroy({ where: { id } });
+        return { message: `Foydalanuvchi o'chirildi` };
     }
     async addRole(addRoleDto) {
         const user = await this.userRepo.findByPk(addRoleDto.userId);

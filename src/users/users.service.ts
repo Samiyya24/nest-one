@@ -36,7 +36,7 @@ export class UsersService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.userRepo.findByPk(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -44,7 +44,8 @@ export class UsersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    this.userRepo.destroy({ where: { id } });
+    return { message: `Foydalanuvchi o'chirildi` };
   }
 
   async addRole(addRoleDto: AddRoleDto) {

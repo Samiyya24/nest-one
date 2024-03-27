@@ -9,9 +9,11 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     createUser(createUserDto: CreateUserDto): Promise<User>;
     getAllUsers(): Promise<User[]>;
-    findOne(id: string): string;
+    findOne(id: string): Promise<User>;
     update(id: string, updateUserDto: UpdateUserDto): string;
-    remove(id: string): string;
+    remove(id: string): {
+        message: string;
+    };
     Addrole(addRoleDto: AddRoleDto): Promise<User>;
     removeRole(addRoleDto: AddRoleDto): Promise<User>;
     activateUser(activateUserDto: ActivateUserDto): Promise<User>;

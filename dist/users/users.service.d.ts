@@ -11,9 +11,11 @@ export declare class UsersService {
     createUser(createUserDto: CreateUserDto): Promise<User>;
     findAll(): Promise<User[]>;
     getUserByEmail(email: string): Promise<User>;
-    findOne(id: number): string;
+    findOne(id: number): Promise<User>;
     update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    remove(id: number): {
+        message: string;
+    };
     addRole(addRoleDto: AddRoleDto): Promise<User>;
     removeRole(addRoleDto: AddRoleDto): Promise<User>;
     activateUser(activateUserDto: ActivateUserDto): Promise<User>;
